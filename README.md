@@ -27,6 +27,8 @@ The Dealer (Server Side):
   
     - Split
       - If a player is dealt a pair of cards at the start of the hand and has at least an equal amount of money in their account to their initial bet, the dealer will give the player a forth            option to "Split" during the first round. If a player chooses to "Split" the dealer will split the pair into two new hands and deal a new card for each hand so the player has two hands          of two cards each. The dealer will also have the player put an equal bet on the newly created hand. After the dealer moves to the next player.
+  - After each player has either chose to "Stand" or has lost via the win/lose conditions the dealer will flip the "Hole" card and reveal it to the players.
+  - If the dealer's total value of their cards is less than 17 the dealer must "Hit" until the total value of their cards is greater than or equal to 17. After the this condition is met the         dealer will check to see what win/lose condition has been met for each player.
 
 The Player (Client Side):
 - Set-Up
@@ -37,3 +39,21 @@ The Player (Client Side):
 - During Play
   - Each round when it's their turn a Player can choose to either "Hit", "Stand", "Double Down", or "Split" if requirements for each option are met.
 
+
+# Win/Lose/Tie Conditions
+Win:
+  - If the player has a higher total than the dealer at the end of the round, that player wins.
+  - If the dealer's total goes over a total of 21, all players that didn't also go over win.
+  - Win without Blackjack is paid out at a 1:1 ratio
+  - Win with Blackjack is paid out at a 3:2 ratio
+
+Lose:
+  - If the dealer has a higher total than the player at the end of the round, that player loses.
+  - If the player goes over a total of 21, that player loses.
+  - If player loses bet money is lost to the dealer
+
+Tie:
+  - If the dealer and the player has the same total value at the end the game is tied and the bet is returned to the player.
+
+Insurance:
+  - If a player has insurance and the dealer has a natural blackjack the bet is paid out at a 2:1 ratio
