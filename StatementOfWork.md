@@ -89,23 +89,7 @@
 
 ### 2.2 Message Schema Definitions
 
-#### Message Types:
-1. `CONNECT` (Client -> Server): Request to join the game room.
-      
-2. `LOBBY_WAIT` (Server -> Client): Notification that server is waiting for Player 2.
-     
-3. `GAME_START` (Server -> Clients): Game initiated, assigns roles (e.g. Player X vs Player O).
-      
-4. `MOVE` (Client -> Server): Player action (e.g., cell coordinates or answer choice).
-     
-5. `STATE_UPDATE` (Server -> Clients): Broadcast current game board / state and active player turn.
-      
-6. `GAME_OVER` (Server -> Clients): Victory / Draw notification with final scores.
-     
-7. `ERROR` (Server -> Client): Invalid move or malformed packet error.
-     
-
-#### Example JSON Protocol Schema:
+#### Default JSON Protocol Schema:
   ```json
       {
         "msg_type": "string",
@@ -114,6 +98,25 @@
         "payload": {}
       }
   ```
+
+#### Message Types: See protocol_blueprint.md
+1. `CONNECT` (Client -> Server): Request to join the game table.
+      
+2. `LOBBY_WAIT` (Server -> Client): Notification that server is waiting for Player 2.
+     
+3. `READY` (Client -> Server): Tells the Server that player has made bet, thus is ready.
+      
+4. `GAME_START` (Server -> Clients): Blackjack Table is initiated.
+     
+5. `MOVE` (Client -> Server): Player action (e.g., hit, stand, double, split).
+      
+6. `STATE_UPDATE` (Server -> Clients): Broadcast current board / state and active player turn.
+     
+7. `GAME_OVER` (Server -> Clients): Victory / Draw notification with final scores.
+
+8. `ERROR` (Server -> Client): Invalid move or malformed packet error.
+
+9. `DISCONNECT` (Client -> Server): Client notifies server of intentional departure/quit.
 
 ---
 
