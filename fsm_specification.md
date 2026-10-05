@@ -4,24 +4,32 @@
 config:
   theme: dark
 ---
-stateDiagram-v2
-    [*] --> DISCONNECTED
-    DISCONNECTED --> WAITING_FOR_PLAYERS: CONNECT (1st player)
-    WAITING_FOR_PLAYERS --> BETTING: CONNECT (2nd player)
-    BETTING --> DEALING: READY (both players submit wagers)
-    DEALING --> PLAYER_TURN: GAME_START broadcast
-    PLAYER_TURN --> PLAYER_TURN: MOVE (HIT / SPLIT / DOUBLE)
-    PLAYER_TURN --> ALL_PLAYERS_DONE: STAND / BUST / DOUBLE (turn finishes)
-    ALL_PLAYERS_DONE --> PLAYER_TURN: No - Switch current_turn (STATE_UPDATE)
-    ALL_PLAYERS_DONE --> DEALER_TURN: Yes
-    DEALER_TURN --> ROUND_END: Dealer draws to 17+ (GAME_OVER broadcast)
-    ROUND_END --> CLEANUP: Round complete / clear table
-    CLEANUP --> BETTING: Both players still connected & funded
-    CLEANUP --> WAITING_FOR_PLAYERS: Only 1 player remains
-    CLEANUP --> DISCONNECTED: Both players leave
-    WAITING_FOR_PLAYERS --> CLEANUP: Unexpected Drop / DISCONNECT
-    PLAYER_TURN --> CLEANUP: Unexpected Drop / DISCONNECT
-    DEALING --> CLEANUP: Unexpected Drop / DISCONNECT
-    BETTING --> CLEANUP: Unexpected Drop / DISCONNECT
-    WAITING_FOR_PLAYERS --> DISCONNECTED: Both leave
+stateDiagram
+  [*] --> DISCONNECTED
+  DISCONNECTED --> WAITING_FOR_PLAYERS:first player connects
+  WAITING_FOR_PLAYERS --> BETTING:second player connects
+  BETTING --> DEALING:wagers ready
+  DEALING --> PLAYER_TURN:GAME_START
+  PLAYER_TURN --> PLAYER_TURN:hit or split
+  PLAYER_TURN --> ALL_PLAYERS_DONE:turn ends
+  ALL_PLAYERS_DONE --> PLAYER_TURN:next player
+  ALL_PLAYERS_DONE --> DEALER_TURN:all done
+  DEALER_TURN --> ROUND_END:dealer resolves
+  ROUND_END --> CLEANUP:GAME_OVER
+  CLEANUP --> BETTING:both remain
+  CLEANUP --> WAITING_FOR_PLAYERS:one remains
+  CLEANUP --> DISCONNECTED:none remain
+  WAITING_FOR_PLAYERS --> CLEANUP:disconnect
+  BETTING --> CLEANUP:disconnect
+  DEALING --> CLEANUP:disconnect
+  PLAYER_TURN --> CLEANUP:disconnect
+  note left of WAITING_FOR_PLAYERS 
+  Send LOBBY_WAIT to the
+        connected player.
+  end note
+  note right of PLAYER_TURN 
+  Send STATE_UPDATE after
+        each valid move.
+  end note
+  note right of DEALER_TURN : Dealer draws to 17+.
 ```
