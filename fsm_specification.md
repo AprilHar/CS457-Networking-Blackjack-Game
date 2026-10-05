@@ -1,4 +1,4 @@
-### 2.3 Game State Machine (FSM) Design (Sprint 1 Deliverable)
+# Game State Machine (FSM) Design (Sprint 1 Deliverable)
 ```mermaid
 ---
 config:

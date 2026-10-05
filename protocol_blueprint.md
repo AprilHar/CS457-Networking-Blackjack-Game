@@ -1,13 +1,13 @@
-# 2. Application-Layer Messaging Protocol Blueprint (Sprint 1 Deliverable)
+# Application-Layer Messaging Protocol Blueprint (Sprint 1 Deliverable)
 
-## 2.1 Message Transport & Serialization Format
+## 1 Message Transport & Serialization Format
 - **Transport Protocol:** TCP
 - **Serialization Format:** [JSON]
 - **Framing Mechanism:** [Newline-delimited (`\n`) JSON payloads]
 
-## 2.2 Message Schema Definitions
+## 2 Message Schema Definitions
 
-### Base JSON Protocol Schema:
+### 2a Base JSON Protocol Schema:
   ```json
       {
         "msg_type": "string",
@@ -24,7 +24,7 @@
 | **`timestamp`** | `integer` | Unix epoch timestamp (seconds or milliseconds), e.g., `1728086400` | Records the time the message was created.|
 | **`payload`** | `object` | JSON Object `{}` containing fields specific to the `msg_type` (e.g., cards, bets, scores, error codes) | Holds the application data required for that message event. Its internal structure varies dynamically based on `msg_type`. |
 
-### Message Types:
+### 2b Message Types:
 1. `CONNECT` (Client -> Server): Request to join the game table.
 ```json
       {
