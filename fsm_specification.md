@@ -1,0 +1,2 @@
+### 2.3 Game State Machine (FSM) Design (Sprint 1 Deliverable)
+- **State Transitions:** Detail state flow: `INIT` -> `WAITING_FOR_PLAYERS` -> `PLAYER_TURN` -> `EVALUATE_MOVE` -> `CHECK_WIN_DRAW` -> `GAME_OVER` -> `CLEANUP`.
