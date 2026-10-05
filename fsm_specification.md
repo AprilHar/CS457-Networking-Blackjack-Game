@@ -1,4 +1,5 @@
 ### 2.3 Game State Machine (FSM) Design (Sprint 1 Deliverable)
+```mermaid
 ---
 config:
   theme: dark
@@ -23,3 +24,4 @@ stateDiagram-v2
     DEALING --> CLEANUP: Unexpected Drop / DISCONNECT
     BETTING --> CLEANUP: Unexpected Drop / DISCONNECT
     WAITING_FOR_PLAYERS --> DISCONNECTED: Both leave
+```
