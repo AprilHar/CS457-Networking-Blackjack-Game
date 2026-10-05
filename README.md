@@ -99,7 +99,7 @@
       }
   ```
 
-#### [Message Types](https://github.com/AprilHar/CS457-Networking-Blackjack-Game/edit/main/protocol_blueprint.md):
+#### [Message Types](https://github.com/AprilHar/CS457-Networking-Blackjack-Game/blob/main/protocol_blueprint.md):
 1. `CONNECT` (Client -> Server): Request to join the game table.
       
 2. `LOBBY_WAIT` (Server -> Client): Notification that server is waiting for Player 2.
@@ -121,7 +121,7 @@
 ---
 
 ### 2.3 Game State Machine (FSM) Design (Sprint 1 Deliverable)
-- **State Transitions:** [Mermaid Diagram](https://github.com/AprilHar/CS457-Networking-Blackjack-Game/edit/main/fsm_specification.md)
+- **State Transitions:** [Mermaid Diagram](https://github.com/AprilHar/CS457-Networking-Blackjack-Game/blob/main/fsm_specification.md)
 ---
 
 ## 3. Game Behavior & Server Concurrency Architecture (Sprint 2 Deliverable)
