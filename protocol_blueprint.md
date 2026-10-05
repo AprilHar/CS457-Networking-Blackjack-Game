@@ -1,13 +1,13 @@
-## 2. Application-Layer Messaging Protocol Blueprint (Sprint 1 Deliverable)
+# 2. Application-Layer Messaging Protocol Blueprint (Sprint 1 Deliverable)
 
-### 2.1 Message Transport & Serialization Format
+## 2.1 Message Transport & Serialization Format
 - **Transport Protocol:** TCP
 - **Serialization Format:** [JSON]
 - **Framing Mechanism:** [Newline-delimited (`\n`) JSON payloads]
 
-### 2.2 Message Schema Definitions
+## 2.2 Message Schema Definitions
 
-#### Default JSON Protocol Schema:
+### Base JSON Protocol Schema:
   ```json
       {
         "msg_type": "string",
@@ -17,7 +17,14 @@
       }
   ```
 
-#### Message Types:
+| Field | Type | Allowed / Expected Values | Description / Role |
+|---|---|---|---|
+| **`msg_type`** | `string` | `CONNECT`, `LOBBY_WAIT`, `READY`, `GAME_START`,<br>`MOVE`, `STATE_UPDATE`, `GAME_OVER`, `ERROR`, `DISCONNECT` | Identifies the the type of message a packet is.|
+| **`player_id`** | `string` | `"gambler_1"` (Client 1), `"gambler_2"` (Client 2),<br>`"dealer"` (Server) | Identifies the sender of the message.|
+| **`timestamp`** | `integer` | Unix epoch timestamp (seconds or milliseconds), e.g., `1728086400` | Records the time the message was created.|
+| **`payload`** | `object` | JSON Object `{}` containing fields specific to the `msg_type` (e.g., cards, bets, scores, error codes) | Holds the application data required for that message event. Its internal structure varies dynamically based on `msg_type`. |
+
+### Message Types:
 1. `CONNECT` (Client -> Server): Request to join the game table.
 ```json
       {
