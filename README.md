@@ -91,92 +91,29 @@
 
 #### Message Types:
 1. `CONNECT` (Client -> Server): Request to join the game room.
-      ```json
-      {
-        "msg_type": "CONNECT",
-        "player_id": "Player_1",
-        "payload": {
-          "row": 0,
-          "col": 2
-        },
-        "timestamp": 1727000000
-      }
-      ```
+      
 2. `LOBBY_WAIT` (Server -> Client): Notification that server is waiting for Player 2.
-      ```json
-      {
-        "msg_type": "LOBBY_WAIT",
-        "player_id": "Player_1",
-        "payload": {
-          "row": 0,
-          "col": 2
-        },
-        "timestamp": 1727000000
-      }
-      ```
+     
 3. `GAME_START` (Server -> Clients): Game initiated, assigns roles (e.g. Player X vs Player O).
-      ```json
-      {
-        "msg_type": "GAME_START",
-        "player_id": "Player_1",
-        "payload": {
-          "row": 0,
-          "col": 2
-        },
-        "timestamp": 1727000000
-      }
-      ```
+      
 4. `MOVE` (Client -> Server): Player action (e.g., cell coordinates or answer choice).
-      ```json
-      {
-        "msg_type": "MOVE",
-        "player_id": "Player_1",
-        "payload": {
-          "row": 0,
-          "col": 2
-        },
-        "timestamp": 1727000000
-      }
-      ```
+     
 5. `STATE_UPDATE` (Server -> Clients): Broadcast current game board / state and active player turn.
-      ```json
-      {
-        "msg_type": "STATE_UPDATE",
-        "player_id": "Player_1",
-        "payload": {
-          "row": 0,
-          "col": 2
-        },
-        "timestamp": 1727000000
-      }
-      ```
+      
 6. `GAME_OVER` (Server -> Clients): Victory / Draw notification with final scores.
-      ```json
-      {
-        "msg_type": "GAME_OVER",
-        "player_id": "Player_1",
-        "payload": {
-          "row": 0,
-          "col": 2
-        },
-        "timestamp": 1727000000
-      }
-      ```
+     
 7. `ERROR` (Server -> Client): Invalid move or malformed packet error.
-      ```json
-      {
-        "msg_type": "ERROR",
-        "player_id": "Player_1",
-        "payload": {
-          "row": 0,
-          "col": 2
-        },
-        "timestamp": 1727000000
-      }
-      ```
+     
 
 #### Example JSON Protocol Schema:
-
+  ```json
+      {
+        "msg_type": "string",
+        "player_id": "string",
+        "timestamp": 0,
+        "payload": {}
+      }
+  ```
 
 ---
 
