@@ -129,6 +129,7 @@
 ### 3.1 Server Concurrency Strategy
 - **Architecture Choice:** [Non-blocking I/O multiplexing (`select.select` / `selectors`)]
 - **Synchronization Logic:** Explains how shared game state and client list are thread-safe (e.g. `threading.Lock`) to prevent race conditions during turn processing.
+- Selectors are the obvious choice for the network connected game of blackjack I am creating. Selectors have many more benifits over threads in this context. They are much less costly to tear down and rebuild for player disconnects/reconnects which is important since networks connections are usually run over unrealiable channels. Selectors are also better suited for sending small messages which is the type of messages that were outlined in protocol_blueprints.md file. They end up working better for keeping track of the game state and sending it since the processing would run on a single thread.
 - See [concurrency_design.md](https://github.com/AprilHar/CS457-Networking-Blackjack-Game/blob/main/concurrency_design.md) for more details
 
 ### 3.2 State & Score Synchronization Across Clients
