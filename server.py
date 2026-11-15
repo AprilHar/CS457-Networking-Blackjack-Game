@@ -306,11 +306,12 @@ class PlayerSession:
         Returns:
             dict: Player state suitable for embedding in a payload.
         """
+        total_bet = sum(h.get("bet", 0) for h in self.hands) if self.hands else self.bet
         return {
             "player_id": self.player_id,
             "name":      self.name,
             "balance":   self.balance,
-            "bet":       self.bet,
+            "bet":       total_bet,
             "hands":     [
                 {
                     "cards":  h["cards"],
@@ -1012,6 +1013,7 @@ class BlackjackServer:
 
         # Deduct extra bet and double the wager
         p.balance    -= hand["bet"]
+        p.bet        += hand["bet"]
         hand["bet"]  *= 2
 
         # Deal exactly one card
@@ -1064,6 +1066,7 @@ class BlackjackServer:
             return
 
         p.balance -= hand["bet"]  # Deduct second bet from balance
+        p.bet     += hand["bet"]  # Add second hand's wager to player total bet
 
         # Create two new single-card hands from the split
         card_a, card_b = hand["cards"]

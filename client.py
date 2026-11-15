@@ -434,13 +434,14 @@ def render_board(payload, my_id):
                 bet = player.get("bet", 0)
                 hands = [{"cards": raw_hand, "score": score, "bet": bet, "status": "ACTIVE"}]
 
-        # Compute total bet for this player
-        total_bet = player.get("bet", 0)
-        if total_bet == 0 and hands:
+        # Compute total bet for this player across all active/split hands
+        if hands:
             total_bet = sum(h.get("bet", 0) for h in hands)
+        else:
+            total_bet = player.get("bet", 0)
 
         # Header row for each player showing name, balance, and bet
-        print(_box_line(f"  {label:<22} Balance: ${balance:<6} Bet: ${total_bet}"))
+        print(_box_line(f"  {label:<22} Balance: ${balance:<6} Total Bet: ${total_bet}"))
 
         for i, hand in enumerate(hands):
             cards  = hand.get("cards", [])
