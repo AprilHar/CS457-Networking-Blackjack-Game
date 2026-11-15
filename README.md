@@ -127,12 +127,15 @@
 ## 3. Game Behavior & Server Concurrency Architecture (Sprint 2 Deliverable)
 
 ### 3.1 Server Concurrency Strategy
-- **Architecture Choice:** [Multi-Threading (`threading.Thread`) OR Non-blocking I/O multiplexing (`select.select` / `selectors`)]
-- **Synchronization Logic:** Explain how shared game state and client list are thread-safe (e.g. `threading.Lock`) to prevent race conditions during turn processing.
+- **Architecture Choice:** [Non-blocking I/O multiplexing (`select.select` / `selectors`)]
+- **Synchronization Logic:** Explains how shared game state and client list are thread-safe (e.g. `threading.Lock`) to prevent race conditions during turn processing.
+- Selectors are the obvious choice for the network connected game of blackjack I am creating. Selectors have many more benifits over threads in this context. They are much less costly to tear down and rebuild for player disconnects/reconnects which is important since networks connections are usually run over unrealiable channels. Selectors are also better suited for sending small messages which is the type of messages that were outlined in protocol_blueprints.md file. They end up working better for keeping track of the game state and sending it since the processing would run on a single thread.
+- See [concurrency_design.md](https://github.com/AprilHar/CS457-Networking-Blackjack-Game/blob/main/concurrency_design.md) for more details
 
 ### 3.2 State & Score Synchronization Across Clients
 - **Turn Enforcement:** Detail how the server validates active player ID before processing moves and broadcasts updated turn notifications to all clients.
 - **Score & Board Synchronization:** Describe how state broadcasts keep client screens synchronized in real time.
+- See [sequence_diagram.md](https://github.com/AprilHar/CS457-Networking-Blackjack-Game/blob/main/sequence_diagram.md) for Mermaid Diagrams
 
 ---
 
